@@ -1,0 +1,39 @@
+> virtaulenv env
+> .\env\Scripts\activate.bat
+# Anything installed for Python is contained within this environment
+
+> pip3 install flask flask-sqlalchemy
+> python app.py
+
+template inheritance
+- Jinja template
+
+static content - link to base.html
+- Jinja syntax to link {{ url_for('static'), filename='css/main.css') }}
+
+Databases
+- sqlalchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # relative path
+db = SQLAlchemy(app)
+
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Task %r>' % self.id
+
+> from app import db
+> db.create_all()
+
+# Creating of the index.html for showing the tasks
+
+app.py
+@app.route('/', methods=['POST', 'GET'])
+def ...
+
+<form action="/" method="POST">
+    ...
+</form>
+
